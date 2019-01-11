@@ -1,3 +1,6 @@
+# Frontend Developer (f/m/d) - Spark Networks
+## Candidate - Helder Santos
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -25,44 +28,44 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+___
 
-### `npm run eject`
+# Original README
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Gallery Images Upload
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Please provide a gallery with an image upload feature.
+This exercise is mostly front end with a tiny bit of back end.
+If you're stronger on the backend, you can try this one, but we'll definitely be looking strength on the front end.
+Please also ensure both the client and server side is *well tested* and *clean code* and that the code works before you submit your code.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Client side
 
-## Learn More
+The client side can be either web or app.
+If it's web, please ensure it can be used on multiple devices.
+Completely up to you what frameworks you use; on our own code we use angular 2 or react for web, and all the usual libs for android and iOS that allows MVVM, MVP, and easier testing.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### Web Requirements
+* Provide a gallery view of all previously uploaded images
+* For image Upload:
+    * mobile web, tablet - this will be a button which will prompt you to either access the camera and take a pic, or select from files on device
+    * desktop web - will have 2 options: drag image to page to upload, or a button which allows selection of multiple files on device
+* super nice to see the web-views handling rotation on devices
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### App Requirements
+For the image upload please provide:
+ * a gallery view of all previously uploaded images
+ * a button which can either request to take a picture, or upload from camera roll
+ * the ability to rotate or crop images
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Server side
+The server side can be in whatever language you are strong with.  
+We mainly use js, java, and a little bit of php and go, so please try to use one of them that you're stronger with.
 
-### Analyzing the Bundle Size
+Don't worry too much about how this stuff should be stored and served properly on the server (such as s3 buckets, and CDNs etc).
+It's fine to store and serve the images locally.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+If you opt for a db approach, store in whatever storage you see fit.
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

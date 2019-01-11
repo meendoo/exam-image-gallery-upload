@@ -1,11 +1,20 @@
 {
   "name": "exam-image-gallery-upload",
   "version": "0.1.0",
+  "description": "Code exam for Spark Networks",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "firebase": "^5.7.2",
+    "gsap": "^2.0.2",
+    "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.3"
+    "react-redux": "^6.0.0",
+    "react-scripts": "2.1.3",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "sharp": "^0.21.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +30,14 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/meendoo/exam-image-gallery-upload.git"
+  },
+  "author": "meendoo - Helder Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meendoo/exam-image-gallery-upload/issues"
+  }
 }

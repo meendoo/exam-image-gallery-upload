@@ -1,0 +1,28 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #e6e6e6;
+  color: #404040;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+.header {
+  text-align: center;
+}
+
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}

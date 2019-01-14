@@ -1,29 +1,40 @@
-import initialState from "../../constants/data.json";
-
 import { MODAL } from "../actions/actions.constants";
+// import sharp from 'sharp'
 
-export function modal(state = initialState.modal, action) {
+const initialState = {
+    "isUploadZoneOpen": false,
+    "isImageViewerOpen": false
+};
+
+export function modal(state = initialState, action) {
     switch (action.type) {
-      case MODAL.OPEN:
+      case MODAL.OPEN_UPLOAD_ZONE:
         return {
           ...state,
-          isModalOpen: true
+          isUploadZoneOpen: true
         }
-      case MODAL.CLOSE:
+
+      case MODAL.OPEN_IMAGE_VIEWER:
         return {
           ...state,
-          isModalOpen: false 
+          isImageViewerOpen: true
         }
-      case MODAL.FILES_DROPPED:
+
+      case MODAL.CLOSE_MODAL:
         return {
           ...state,
-          files: action.files
+          isImageViewerOpen: false,
+          isUploadZoneOpen: false
         }
-      case MODAL.CLEAR_FILES:
+
+      case MODAL.ROTATE_COUNTER_CLOCKWISE:
         return {
           ...state,
-          files: {}
+          stagedFiles: [
+            ...state.stagedFiles
+          ]
         }
+
       default:
         return state
   }

@@ -1,20 +1,10 @@
-html {
-  box-sizing: border-box;
-}
+@import './styles/mixins.scss';
+@import './styles/base.module.scss';
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  background-color: #e6e6e6;
-  color: #404040;
-}
-
-h1 {
-  font-size: 48px;
+.appTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header {
@@ -24,5 +14,9 @@ h1 {
 main {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 4rem;
+  padding: 0 1rem;
+
+  @include lg {
+    padding: 0 4rem;
+  }
 }

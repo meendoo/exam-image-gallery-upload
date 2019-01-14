@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Image from './image'
-import styles from './gallery.module.scss'
-import Button from './button'
-import OrderIcon from './orderIcon'
-import { TimelineMax } from 'gsap'
-import { galleryActions } from "../store/actions";
-import { modalActions } from '../store/actions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Image from './image';
+import styles from './gallery.module.scss';
+import { TimelineMax } from 'gsap';
+import { fetchImages } from "../store/actions/gallery.actions";
+import { openImageViewerModal } from "../store/actions/modal.actions";
 
 export class Gallery extends Component {
     constructor(props){
@@ -14,23 +12,18 @@ export class Gallery extends Component {
         this.imageAnimation = new TimelineMax();
     }
 
-    handleOrder = () => {
-        const {dispatch, order} = this.props;
-        order === "Newest" ? dispatch(galleryActions.orderByOldest()) : dispatch(galleryActions.orderByNewest()); 
-    }
-
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps.dataMock !== this.props.dataMock || prevProps.order !== this.props.order) {
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.images !== this.props.images || prevProps.order !== this.props.order) {
             this.animateImages().play();
         }
     }
 
     toggleOrderByTimestamp = (a, b) => {
         if (this.props.order === 'Newest') {
-            return b.timestamp - a.timestamp;
+            return b.timestamp.seconds - a.timestamp.seconds;
         }
         if (this.props.order === "Oldest") {
-            return a.timestamp - b.timestamp
+            return a.timestamp.seconds - b.timestamp.seconds
         }
         return 0;
     }
@@ -40,41 +33,33 @@ export class Gallery extends Component {
     }
 
     componentDidMount = () => {
-        this.animateImages().play();
+        this.props.fetchImages();
     }
-
-    openModal = () => {
-        this.props.dispatch(modalActions.openModal());
-    }
+    
 
     render() {
         this.imageAnimation.kill().clear();
-        const { order } = this.props;
-        const images = this.props.images
+        const { images } = this.props;
+        const imgs = images && images.length > 0 && images
             .sort((a, b) => this.toggleOrderByTimestamp(a,b))
-            .map(img => <Image className={styles.image} url={img.url} caption={img.caption} key={img.id}  /> );
+            .map(img => <Image className={styles.image} url={img.url} caption={img.name} key={img.id} onClick={()=>this.props.openImageViewerModal(img)} /> );
 
         return (
-            <div>
-                <div>
-                    <ul className={styles.actions}>
-                        <li><Button onClick={this.openModal} tabIndex="0">Add Media</Button></li>
-                        <li className={styles.orderToggle} onClick={this.handleOrder}>
-                            <OrderIcon width="16px" height="16px"/> <span>{order}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div className={styles.gallery}>
-                    {this.props.images ? images : "No pictures to show"}
-                </div>
+            <div className={styles.gallery}>
+                {images && images.length > 0 && imgs}
             </div>
         )
     }
 }
 
-const mapStateToProps = ({gallery}) => ({
-    images: gallery.images,
-    order: gallery.order
+const mapStateToProps = (state) => ({
+    images: state.gallery.images,
+    order: state.gallery.order
 })
 
-export default connect(mapStateToProps)(Gallery);
+const mapDispatchToProps = (dispatch) => ({
+    fetchImages: () => dispatch(fetchImages()),
+    openImageViewerModal: (imageRef) => dispatch(openImageViewerModal(imageRef))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

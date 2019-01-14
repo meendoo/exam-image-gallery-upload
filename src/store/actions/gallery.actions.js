@@ -1,19 +1,36 @@
 import { GALLERY } from './actions.constants'
+import { firestore } from '../../services/firebase';
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
-export const galleryActions = {
-    listImages,
-    orderByNewest,
-    orderByOldest
-}
+export const fetchImages = () => {
+    return async dispatch => {
+        dispatch({ type: GALLERY.FETCHING_IMAGES });
+        dispatch(showLoading());
+        await firestore.collection('images')
+            .onSnapshot(snapshot => {
+                let fetchedData = {
+                    images: []
+                }
 
-function listImages(data) {
-    return { type: GALLERY.LIST_IMAGES, data }
-}
+                snapshot.forEach(doc => {
+                    fetchedData.images.push({
+                        id: doc.id,
+                        ...doc.data(),
+                    });
+                });
+                dispatch({
+                    type: GALLERY.FETCHING_IMAGES_SUCCESS,
+                    ...fetchedData
+                })
+                dispatch(hideLoading());
+            });
+    }
+};
 
-function orderByNewest() {
+export const orderByNewest = () => {
     return { type: GALLERY.ORDERBY_NEWEST }
-}
+};
 
-function orderByOldest() {
+export const orderByOldest = () => {
     return { type: GALLERY.ORDERBY_OLDEST }
-}
+};

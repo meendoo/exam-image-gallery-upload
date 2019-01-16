@@ -1,7 +1,14 @@
 # Frontend Developer (f/m/d) - Spark Networks
 ## Candidate - Helder Santos
 
+_Hallo!_
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project uses [Redux](https://redux.js.org/) to manage the application state.
+[Firebase Cloud Firestore](https://firebase.google.com/products/firestore/?authuser=0) and [Firebase Cloud Storage](https://firebase.google.com/products/storage/?authuser=0) were used to store data and files on a server.
+Tests were not implemented in depth. I tried my best for the moment, since I'm still not experienced in doing them.
+
+Cheers!
 
 ## Available Scripts
 

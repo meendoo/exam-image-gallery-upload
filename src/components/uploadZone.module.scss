@@ -1,0 +1,25 @@
+.uploadBox {
+    max-width: 960px;
+    min-width: 75vw;
+    height: 50vh;
+    border: 2px dashed #ccc;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.highLight {
+    border: 2px dashed #007bff;
+    background-color: rgba(0, 100, 175, 0.2);
+}
+
+.dashedText {
+    margin: 1.5rem 1rem;
+}
+
+.title {
+    margin-bottom: 0;
+}

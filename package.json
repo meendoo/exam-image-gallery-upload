@@ -4,25 +4,29 @@
   "description": "Code exam for Spark Networks",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
     "firebase": "^5.7.2",
+    "gh-pages": "^2.0.1",
     "gsap": "^2.0.2",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-photoswipe": "^1.3.0",
     "react-redux": "^5.1.1",
     "react-redux-loading-bar": "^4.2.0",
     "react-scripts": "2.1.3",
     "react-toastify": "^4.5.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "sharp": "^0.21.1"
+    "source-map-explorer": "^1.6.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "gh-pages -b master -d build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer build/static/js/main.*"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,8 +42,12 @@
     "url": "git+ssh://git@github.com/meendoo/exam-image-gallery-upload.git"
   },
   "author": "meendoo - Helder Santos",
+  "homepage": "https://meendoo.github.io/exam-image-gallery-upload",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/meendoo/exam-image-gallery-upload/issues"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
   }
 }

@@ -1,8 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore'
-// import 'firebase/database'
 import 'firebase/storage'
 
+// Firebase configuration
 var config = {
   apiKey: "AIzaSyDzyK4Mflvtdyn84SGPSu2Udq1zkV_iOJI",
   authDomain: "exam-image-gallery.firebaseapp.com",
@@ -11,10 +11,11 @@ var config = {
   storageBucket: "exam-image-gallery.appspot.com",
   messagingSenderId: "968438638429"
 };
+
+// Firebase initialization
 firebase.initializeApp(config);
 firebase.firestore().settings({ timestampsInSnapshots: true});
 
 export default firebase;
 export const firestore = firebase.firestore();
-// export const database = firebase.database();
 export const storage = firebase.storage();

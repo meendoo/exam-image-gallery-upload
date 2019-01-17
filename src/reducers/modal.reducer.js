@@ -27,6 +27,7 @@ export function modal(state = initialState, action) {
         }
 
       case MODAL.UPLOAD_SUCCESS:
+      case MODAL.UPLOAD_REJECT:
         return {
           ...state,
           isUploading: false

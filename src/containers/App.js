@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../styles/fixes.scss';
 import './App.scss';
+import { connect } from 'react-redux';
 import Nav from '../components/Nav'
 import Header from './Header'
 import Gallery from './Gallery'
@@ -11,19 +12,23 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Footer from './Footer';
 
-export default function App() {
-	return (
-		<>
-			<LoadingBar style={{zIndex: 100, height: '4px'}}/>
-			<Header/>
-			<main>
-				<Nav/>
-				<Gallery/>
-				<UploadZone/>
-				<ImageViewer/>
-			</main>
-			<Footer/>
-			<ToastContainer position="bottom-left"/>
-		</>
-	)
+export class App extends Component {
+	render() {
+		return (
+			<>
+				<LoadingBar style={{zIndex: 100, height: '4px'}}/>
+				<Header/>
+				<main>
+					<Nav/>
+					<Gallery/>
+					<UploadZone/>
+					<ImageViewer/>
+				</main>
+				<Footer/>
+				<ToastContainer position="bottom-left"/>
+			</>
+		)
+	}
 }
+
+export default connect()(App);

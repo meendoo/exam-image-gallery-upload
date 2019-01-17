@@ -11,14 +11,12 @@ export class Gallery extends Component {
         super(props);
         this.imageAnimation = new TimelineMax();
     }
-
-    componentDidUpdate = (prevProps) => {
-        if (prevProps.images !== this.props.images || prevProps.order !== this.props.order) {
-            this.animateImages().play();
-        }
+    
+    animateImages = () => {
+        return this.imageAnimation.staggerFromTo(`.${styles.image}`, 0.2, {autoAlpha: 0}, {autoAlpha: 1}, 0.05);
     }
 
-    toggleOrderByTimestamp = (a, b) => {
+    toggleSortOrderByTimestamp = (a, b) => {
         if (this.props.order === 'Newest') {
             return b.timestamp.seconds - a.timestamp.seconds;
         }
@@ -28,8 +26,10 @@ export class Gallery extends Component {
         return 0;
     }
 
-    animateImages = () => {
-        return this.imageAnimation.staggerFromTo(`.${styles.image}`, 0.2, {autoAlpha: 0}, {autoAlpha: 1}, 0.05);
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.images !== this.props.images || prevProps.order !== this.props.order) {
+            this.animateImages().play();
+        }
     }
 
     componentDidMount = () => {
@@ -40,7 +40,7 @@ export class Gallery extends Component {
         this.imageAnimation.kill().clear();
         const { images } = this.props;
         const imgs = images && images.length > 0 && images
-            .sort((a, b) => this.toggleOrderByTimestamp(a,b))
+            .sort((a, b) => this.toggleSortOrderByTimestamp(a,b))
             .map((img, imgIndex) => {                
                 return (
                     <Image

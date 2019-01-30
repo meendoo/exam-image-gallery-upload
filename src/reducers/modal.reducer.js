@@ -1,6 +1,6 @@
 import { MODAL } from "../constants";
 
-const initialState = {
+export const initialState = {
     "isUploadZoneOpen": false,
     "isImageViewerOpen": false,
     "isUploading": false
@@ -39,15 +39,7 @@ export function modal(state = initialState, action) {
           isImageViewerOpen: false,
           isUploadZoneOpen: false
         }
-
-      case MODAL.ROTATE_COUNTER_CLOCKWISE:
-        return {
-          ...state,
-          stagedFiles: [
-            ...state.stagedFiles
-          ]
-        }
-
+        
       default:
         return state
   }

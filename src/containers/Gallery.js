@@ -16,16 +16,6 @@ export class Gallery extends Component {
         return this.imageAnimation.staggerFromTo(`.${styles.image}`, 0.2, {autoAlpha: 0}, {autoAlpha: 1}, 0.05);
     }
 
-    toggleSortOrderByTimestamp = (a, b) => {
-        if (this.props.order === 'Newest') {
-            return b.timestamp.seconds - a.timestamp.seconds;
-        }
-        if (this.props.order === "Oldest") {
-            return a.timestamp.seconds - b.timestamp.seconds
-        }
-        return 0;
-    }
-
     componentDidUpdate = (prevProps) => {
         if (prevProps.images !== this.props.images || prevProps.order !== this.props.order) {
             this.animateImages().play();
@@ -40,7 +30,6 @@ export class Gallery extends Component {
         this.imageAnimation.kill().clear();
         const { images } = this.props;
         const imgs = images && images.length > 0 && images
-            .sort((a, b) => this.toggleSortOrderByTimestamp(a,b))
             .map((img, imgIndex) => {                
                 return (
                     <Image

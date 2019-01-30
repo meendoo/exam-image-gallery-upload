@@ -42,6 +42,12 @@ export const fetchSuccess = (images) => {
     return { type: GALLERY.FETCH_SUCCESS, images };
 }
 
+export const handleOrder = (currentOrder) => {
+    return dispatch => {
+        currentOrder === "Newest" ? dispatch(orderByOldest()) : dispatch(orderByNewest()) 
+    }
+}
+
 // Sort images by the newest on the gallery
 export const orderByNewest = () => {
     return { type: GALLERY.ORDERBY_NEWEST }

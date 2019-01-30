@@ -6,28 +6,37 @@ import OrderIcon from '../icons/orderIcon';
 import styles from './nav.module.scss';
 import { ModalActions, GalleryActions } from '../actions';
 
+export const OrderButton = ({onClick, order}) => {
+    return (
+        <Button className={styles.orderToggle} onClick={onClick}>
+            <OrderIcon width="16px" height="16px"/> <span>{order}</span>
+        </Button>
+    )
+}
+
+export const DeleteButton = ({onClick}) => {
+    return (
+        <Button className={styles.btnClear} onClick={onClick}>
+            <DeleteIcon width="18" height="18" fill="#fff" className={styles.clearIcon}/> <span className={styles.clearSpan}>Clear Gallery</span>
+        </Button>
+    )
+}
+
 class Nav extends Component {
-    handleOrder = () => {
-        this.props.order === "Newest" ? this.props.orderByOldest() : this.props.orderByNewest(); 
-    }
 
     render() {
         const { order, images } = this.props;
         return (
             <nav>
-                <ul className={styles.actions}>
-                    <li><Button onClick={()=>this.props.openUploadZoneModal()} tabIndex="0">Add Media</Button></li>
-                    <ul className={styles.actionsRight}>
+                <div className={styles.actions}>
+                    <Button onClick={()=>this.props.openUploadZoneModal()} tabIndex="0">Add Media</Button>
+                    <div className={styles.actionsRight}>
                         {images && images.length > 0 && (
-                            <li className={styles.btnClear} onClick={()=>this.props.clearGallery(images)}>
-                                <DeleteIcon width="18" height="18" fill="#fff" className={styles.clearIcon}/> <span className={styles.clearSpan}>Clear Gallery</span>
-                            </li>
+                            <DeleteButton onClick={()=>this.props.clearGallery(images)}/>
                         )}
-                        <li className={styles.orderToggle} onClick={this.handleOrder}>
-                            <OrderIcon width="16px" height="16px"/> <span>{order}</span>
-                        </li>
-                    </ul>
-                </ul>
+                        <OrderButton order={order} onClick={()=>this.props.handleOrder(order)}/>
+                    </div>
+                </div>
             </nav>
         )
     }
@@ -40,8 +49,7 @@ const mapStateToProps = ({gallery}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     openUploadZoneModal: () => dispatch(ModalActions.openUploadZoneModal()),
-    orderByNewest: () => dispatch(GalleryActions.orderByNewest()),
-    orderByOldest: () => dispatch(GalleryActions.orderByOldest()),
+    handleOrder: (currentOrder) => dispatch(GalleryActions.handleOrder(currentOrder)),
     clearGallery: (refs) => dispatch(GalleryActions.clearGallery(refs))
 });
 

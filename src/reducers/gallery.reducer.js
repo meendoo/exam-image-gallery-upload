@@ -1,6 +1,7 @@
 import { GALLERY } from "../constants";
+import { toggleSortOrderByTimestamp } from '../utils'
 
-const initialState = {
+export const initialState = {
   order: "Newest"
 }
 
@@ -22,11 +23,13 @@ export function gallery(state = initialState, action) {
       case GALLERY.ORDERBY_NEWEST:
         return {
           ...state,
+          images: toggleSortOrderByTimestamp([...state.images], 'Newest'),
           order: 'Newest'
         }
       case GALLERY.ORDERBY_OLDEST:
         return {
           ...state,
+          images: toggleSortOrderByTimestamp([...state.images], 'Oldest'),
           order: 'Oldest'
         }
       case GALLERY.CLEAR_GALLERY:

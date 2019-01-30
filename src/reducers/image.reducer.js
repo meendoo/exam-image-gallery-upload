@@ -10,7 +10,7 @@ export function image(state = initialState, action) {
             const {imageRef, currentViewIndex} = action.payload;
             return {
                 ...state,
-                imageRef: [imageRef],
+                imageRef,
                 currentViewIndex
             }
         }

@@ -27,7 +27,7 @@ class ImageViewer extends Component {
 	render() {
 		const { isImageViewerOpen, imageRef } = this.props;
 		const items = [];
-		imageRef && imageRef.length > 0 && imageRef[0].forEach(img => {			
+		imageRef && imageRef.length > 0 && imageRef.forEach(img => {			
 			let el = new Image();
 			el.src = img.url;
 

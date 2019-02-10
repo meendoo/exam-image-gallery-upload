@@ -1,6 +1,6 @@
 const IMAGE = {
-    VIEW_IMAGE: '@IMAGE_VIEW_IMAGE',
-    DELETE: '@IMAGE_DELETE'
-}
+  VIEW_IMAGE: "@IMAGE_VIEW_IMAGE",
+  DELETE: "@IMAGE_DELETE"
+};
 
-export default IMAGE
+export default IMAGE;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Button from './Button';
-import DeleteIcon from '../icons/deleteIcon';
-import OrderIcon from '../icons/orderIcon';
+import DeleteIcon from '../icons/DeleteIcon';
+import OrderIcon from '../icons/OrderIcon';
 import styles from './nav.module.scss';
 import { ModalActions, GalleryActions } from '../actions';
 
@@ -22,7 +22,7 @@ export const DeleteButton = ({onClick}) => {
     )
 }
 
-class Nav extends Component {
+export class Nav extends Component {
 
     render() {
         const { order, images } = this.props;

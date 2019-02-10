@@ -5,7 +5,7 @@ import styles from "./modal.module.scss";
 import { TweenMax } from 'gsap'
 import { ModalActions } from '../actions';
 
-class Modal extends Component {
+export class Modal extends Component {
 
     animateModalIn() {
         if (this.props.isModalOpen) {

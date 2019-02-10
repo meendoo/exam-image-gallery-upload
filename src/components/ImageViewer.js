@@ -5,7 +5,7 @@ import './imageViewer.scss';
 import 'react-photoswipe/lib/photoswipe.css';
 import { PhotoSwipe } from 'react-photoswipe';
 
-class ImageViewer extends Component {
+export class ImageViewer extends Component {
 	constructor(props) {
 		super(props);
 		this.options = {

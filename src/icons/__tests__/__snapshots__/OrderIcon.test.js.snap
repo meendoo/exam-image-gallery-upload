@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderIcon should render as it is 1`] = `
+<svg
+  height="115px"
+  viewBox="0 0 115 115"
+  width="115px"
+  x="0px"
+  y="0px"
+>
+  <title>
+    Arrow 30.1
+  </title>
+  <desc>
+    Created with Sketch.
+  </desc>
+  <g
+    fill="none"
+    fillRule="evenodd"
+    stroke="none"
+    strokeWidth="1"
+  >
+    <g
+      fill="currentColor"
+      fillRule="nonzero"
+    >
+      <path
+        d="M103.9,71.9L103.9,71.9v12.7l-29.9,30l-29.9-30V71.9l25.4,25.5V55.7h9v41.6L103.9,71.9z M11.1,43.1L11.1,43.1V30.4L41,0.4l29.9,30v12.7L45.5,17.6v41.6h-9V17.6L11.1,43.1z"
+      />
+    </g>
+  </g>
+</svg>
+`;

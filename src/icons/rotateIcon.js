@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-export default function Rotate({width, height, fill, className, right, onClick}) {
+export default function RotateIcon({width, height, fill, className, right, onClick}) {
   return (
     <svg height={height || "40px"} width={width || "40px"} className={className || ''} viewBox="0 0 22 22" x="0px" y="0px" onClick={onClick}>
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" transform={right && "scale(-1, 1) translate(-22, 0)"}>

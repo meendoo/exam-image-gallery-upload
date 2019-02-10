@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-export default function photoIcon({width, height, fill, className}) {
+export default function PhotoIcon({width, height, fill, className}) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" height={height || "48px"} width={width || "48px"} viewBox="0 0 48 48" fill={fill || "currentColor"} className={className || ""}>
         <path d="M0 0h48v48h-48z" fill="none"/>

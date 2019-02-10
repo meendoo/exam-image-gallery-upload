@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image component snapshot 1`] = `
+<figure
+  className="figure undefined"
+>
+  <div
+    className="imgDiv undefined"
+    style={
+      Object {
+        "backgroundImage": "url('undefined')",
+      }
+    }
+  />
+</figure>
+`;

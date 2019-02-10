@@ -56,7 +56,7 @@ export class UploadZone extends Component {
                         <h2 className={styles.dashedText}>&ndash; or &ndash;</h2>
                         <label htmlFor="imageInput" className={styles.button}>
                             <Button tabIndex="0">Select files</Button>
-                            <input onChange={this.onInputAddFiles} type="file" id="imageInput" accept="image/png, image/jpeg" multiple hidden></input>
+                            <input onChange={this.onInputAddFiles} name="image" type="file" id="imageInput" accept="image/png, image/jpeg" multiple hidden></input>
                         </label>
                     </div>
                 </Modal>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { gallery } from './gallery.reducer'
-import { GALLERY } from '../constants'
-import { toggleSortOrderByTimestamp } from '../utils'
+import { gallery } from '../gallery.reducer'
+import { GALLERY } from '../../constants'
+import { toggleSortOrderByTimestamp } from '../../utils'
 
 const imageFetchMock = [
     {

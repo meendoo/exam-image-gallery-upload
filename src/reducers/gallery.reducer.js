@@ -16,9 +16,7 @@ export function gallery(state = initialState, action) {
         return {
           ...state,
           isFetching: false,
-          images: [
-            ...action.images
-          ]
+          images: toggleSortOrderByTimestamp([...action.images], state.order)
         }
       case GALLERY.ORDERBY_NEWEST:
         return {

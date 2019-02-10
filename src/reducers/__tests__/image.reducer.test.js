@@ -1,6 +1,6 @@
 import React from 'react'
-import { image } from './image.reducer'
-import { IMAGE } from '../constants'
+import { image } from '../image.reducer'
+import { IMAGE } from '../../constants'
 
 const imageFetchMock = [
     {

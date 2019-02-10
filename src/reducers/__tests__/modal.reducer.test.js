@@ -1,6 +1,6 @@
 import React from 'react'
-import { modal } from './modal.reducer'
-import { MODAL } from '../constants'
+import { modal } from '../modal.reducer'
+import { MODAL } from '../../constants'
 
 describe('Modal Reducer', () => {
     it('should return initial state', () => {

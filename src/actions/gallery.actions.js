@@ -1,9 +1,9 @@
 import React from 'react'
 import { GALLERY } from '../constants'
-import { firestore } from '../services/firebase';
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { toast } from 'react-toastify';
 import { ImageActions } from '../actions'
+import api from '../services/api';
 
 // Connects to the 'images' collection on Firestore DB and populates images array
 export const fetchImages = () => {
@@ -11,19 +11,9 @@ export const fetchImages = () => {
         dispatch(showLoading());
         dispatch(fetchRequest());
         try {
-            await firestore.collection('images')
-                .onSnapshot(snapshot => {
-                    let fetchedData = {
-                        images: []
-                    }
-                    snapshot.forEach(doc => {
-                        fetchedData.images.push({
-                            id: doc.id,
-                            ...doc.data(),
-                        });
-                    });
-                    dispatch(fetchSuccess(fetchedData.images))
-                });
+            await api.get('/image').then(images => {
+                dispatch(fetchSuccess(images.data))
+            })
         } catch (error) {
             toast.error(error);
             dispatch(hideLoading());
@@ -69,16 +59,24 @@ export const ToastCloseButton = ({ closeToast, confirmAction }) => {
 // Deletes all images from DB
 export const clearGallery = (refs) =>
     async dispatch => {
+        // Deletions are done file by file (Firebase doesn't allow deleting the whole structure)
+        const confirmDelete = () => {
+            let deletePromises = [];
+            refs.forEach(ref => {
+                deletePromises.push(
+                    dispatch(ImageActions.deleteImage(ref))
+                        .then(res => res)
+                        .catch(err=> console.log(err))
+                );
+            });
+            Promise.all(deletePromises).then(()=>
+                dispatch(fetchImages())
+            )
+        }
         // Shows confirmation window
         toast.error("Delete all images?", {
             position: 'top-right',
-            closeButton: <ToastCloseButton confirmAction={confirmDelete}/>
+            closeButton: <ToastCloseButton confirmAction={()=>confirmDelete()}/>
         });
-        // Deletions are done file by file (Firebase doesn't allow deleting the whole structure)
-        function confirmDelete() {
-            refs.forEach(ref => {                
-                dispatch(ImageActions.deleteImage(ref))
-            });
-        } 
         return { type: GALLERY.CLEAR_GALLERY }
 }

@@ -1,8 +1,7 @@
 import { MODAL } from '../constants'
-import { storage, firestore } from '../services/firebase';
 import { toast } from "react-toastify";
-import { ImageActions } from '../actions';
-import uuid from 'uuid/v4';
+import { ImageActions, GalleryActions } from '../actions';
+import api from '../services/api';
 
 // Success message with template literal
 const successMessage = files => `Awesome! ${files.length} image${files.length > 1 ? 's' : ''} ${files.length > 1 ? 'were' : 'was'} uploaded successfully.`
@@ -34,48 +33,40 @@ export const sendFiles = (files) => async dispatch => {
         let toastId = null;
         
         // Stores files
-        storage.ref().child(`dummybckp/${uuid()}.${files[i].type.split('/')[1]}`).put(files[i]); // for monitoring purposes
-        let fbStorage = storage.ref().child(`images/${uuid()}.${files[i].type.split('/')[1]}`).put(files[i]);
+        // storage.ref().child(`dummybckp/${uuid()}.${files[i].type.split('/')[1]}`).put(files[i]); // for monitoring purposes
+        // let fbStorage = storage.ref().child(`images/${uuid()}.${files[i].type.split('/')[1]}`).put(files[i]);
         
-        // Grouping promises
-        storagePromises.push(fbStorage);
+        // Creates FormData object containing file to be passed down on post body
+        const fileData = new FormData();
+        fileData.append('image', files[i], files[i].name);
         
-        // Handle upload progress 
-        fbStorage.on('state_changed',
-            snapshot => {
-                let progress = (snapshot.bytesTransferred / snapshot.totalBytes);
+        // Send files
+        let postFile = api.post('image', fileData, {
+            onUploadProgress: e => {
+                let progress = e.loaded / e.total;
+                if (e.loaded / e.total === 1) {
+                    toast.done(toastId);
+                    return;
+                }
                 if(toastId === null){
                     toastId = toast('Upload in Progress', {progress: progress, progressClassName: 'toastProgressBar'});
                 } else {
                     toast.update(toastId, {progress: progress});
                 }
-            },
-            err => {
-                toast.error(err, {toastId: toastId});
-            },
-            () => {
-                toast.done(toastId);
-
-                // Grabs URL from stored image file
-                fbStorage.snapshot.ref.getDownloadURL()
-                    .then(imgURL => {
-                        // Creates doc on DB with image data and URL from above
-                        firestore.collection('images').add({
-                            "url": imgURL,
-                            "name": fbStorage.snapshot.metadata.name,
-                            "timestamp": new Date()
-                        })
-                    }).catch(err => toast.error(err));
             }
-        );
+        })
+        .catch(err => toast.error(err, {toastId: toastId}));
+        
+        // Grouping promises
+        storagePromises.push(postFile);
     };
 
     // After all uploads are done, dispatch success actions
     Promise.all(storagePromises)
         .then(()=> {
             dispatch({ type: MODAL.UPLOAD_SUCCESS });
-            toast.done();
-            toast.success(successMessage(files), {autoClose: true})
+            toast.success(successMessage(files), {autoClose: true});
+            dispatch(GalleryActions.fetchImages());
         })
         .catch(err => {
             dispatch({ type: MODAL.UPLOAD_REJECT });

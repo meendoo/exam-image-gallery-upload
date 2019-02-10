@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PhotoIcon from "../icons/photoIcon";
+import PhotoIcon from "../icons/PhotoIcon";
 import styles from './header.module.scss';
 import { TweenMax, Power4 } from 'gsap';
 

@@ -15,7 +15,7 @@ export class Gallery extends Component {
     animateImages = () => {
         return this.imageAnimation.staggerFromTo(`.${styles.image}`, 0.2, {autoAlpha: 0}, {autoAlpha: 1}, 0.05);
     }
-
+    
     componentDidUpdate = (prevProps) => {
         if (prevProps.images !== this.props.images || prevProps.order !== this.props.order) {
             this.animateImages().play();
@@ -30,12 +30,12 @@ export class Gallery extends Component {
         this.imageAnimation.kill().clear();
         const { images } = this.props;
         const imgs = images && images.length > 0 && images
-            .map((img, imgIndex) => {                
+            .map((img, imgIndex) => {
                 return (
                     <Image
-                        key={img.id}
+                        key={img.imageId}
                         url={img.url}
-                        caption={img.name}
+                        // caption={img.name}
                         className={styles.image}
                         onClick={()=>this.props.openImageViewerModal(images, imgIndex)}
                     />
@@ -57,7 +57,6 @@ export class Gallery extends Component {
 
 const mapStateToProps = ({gallery, modal}) => ({
     images: gallery.images,
-    order: gallery.order,
     isUploading: modal.isUploading
 })
 

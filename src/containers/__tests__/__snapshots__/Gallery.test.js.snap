@@ -1,0 +1,344 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Connected <Gallery/> with mockStore it should render as it is 1`] = `
+<div
+  className="gallery"
+>
+  <figure
+    className="figure image"
+    onClick={[Function]}
+  >
+    <div
+      className="imgDiv image"
+      style={
+        Object {
+          "backgroundImage": "url('https://picsum.photos/200/300')",
+        }
+      }
+    />
+  </figure>
+  <figure
+    className="figure image"
+    onClick={[Function]}
+  >
+    <div
+      className="imgDiv image"
+      style={
+        Object {
+          "backgroundImage": "url('https://picsum.photos/300/400')",
+        }
+      }
+    />
+  </figure>
+  <figure
+    className="figure image"
+    onClick={[Function]}
+  >
+    <div
+      className="imgDiv image"
+      style={
+        Object {
+          "backgroundImage": "url('https://picsum.photos/400/500')",
+        }
+      }
+    />
+  </figure>
+</div>
+`;
+
+exports[`Connected <Gallery/> with mockStore should show 3 images when provided 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Connect(Gallery)
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <Image
+      onClick={[Function]}
+      url="https://picsum.photos/200/300"
+    />
+    <Image
+      onClick={[Function]}
+      url="https://picsum.photos/300/400"
+    />
+    <Image
+      onClick={[Function]}
+      url="https://picsum.photos/400/500"
+    />
+  </Connect(Gallery)>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Image
+          onClick={[Function]}
+          url="https://picsum.photos/200/300"
+        />,
+        <Image
+          onClick={[Function]}
+          url="https://picsum.photos/300/400"
+        />,
+        <Image
+          onClick={[Function]}
+          url="https://picsum.photos/400/500"
+        />,
+      ],
+      "fetchImages": [Function],
+      "images": Array [
+        Object {
+          "imageId": 0,
+          "name": "A.jpeg",
+          "timestamp": Object {
+            "seconds": 1548900000,
+          },
+          "url": "https://picsum.photos/200/300",
+        },
+        Object {
+          "imageId": 1,
+          "name": "B.jpeg",
+          "timestamp": Object {
+            "seconds": 1548800000,
+          },
+          "url": "https://picsum.photos/300/400",
+        },
+        Object {
+          "imageId": 2,
+          "name": "C.jpeg",
+          "timestamp": Object {
+            "seconds": 1548700000,
+          },
+          "url": "https://picsum.photos/400/500",
+        },
+      ],
+      "isUploading": false,
+      "openImageViewerModal": [Function],
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "storeSubscription": Subscription {
+        "listeners": Object {
+          "clear": [Function],
+          "get": [Function],
+          "notify": [Function],
+          "subscribe": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": [Function],
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": "0",
+        "nodeType": "function",
+        "props": Object {
+          "onClick": [Function],
+          "url": "https://picsum.photos/200/300",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "1",
+        "nodeType": "function",
+        "props": Object {
+          "onClick": [Function],
+          "url": "https://picsum.photos/300/400",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": "2",
+        "nodeType": "function",
+        "props": Object {
+          "onClick": [Function],
+          "url": "https://picsum.photos/400/500",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Image
+            onClick={[Function]}
+            url="https://picsum.photos/200/300"
+          />,
+          <Image
+            onClick={[Function]}
+            url="https://picsum.photos/300/400"
+          />,
+          <Image
+            onClick={[Function]}
+            url="https://picsum.photos/400/500"
+          />,
+        ],
+        "fetchImages": [Function],
+        "images": Array [
+          Object {
+            "imageId": 0,
+            "name": "A.jpeg",
+            "timestamp": Object {
+              "seconds": 1548900000,
+            },
+            "url": "https://picsum.photos/200/300",
+          },
+          Object {
+            "imageId": 1,
+            "name": "B.jpeg",
+            "timestamp": Object {
+              "seconds": 1548800000,
+            },
+            "url": "https://picsum.photos/300/400",
+          },
+          Object {
+            "imageId": 2,
+            "name": "C.jpeg",
+            "timestamp": Object {
+              "seconds": 1548700000,
+            },
+            "url": "https://picsum.photos/400/500",
+          },
+        ],
+        "isUploading": false,
+        "openImageViewerModal": [Function],
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "storeSubscription": Subscription {
+          "listeners": Object {
+            "clear": [Function],
+            "get": [Function],
+            "notify": [Function],
+            "subscribe": [Function],
+          },
+          "onStateChange": [Function],
+          "parentSub": undefined,
+          "store": Object {
+            "clearActions": [Function],
+            "dispatch": [Function],
+            "getActions": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+          },
+          "unsubscribe": [Function],
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": "0",
+          "nodeType": "function",
+          "props": Object {
+            "onClick": [Function],
+            "url": "https://picsum.photos/200/300",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "1",
+          "nodeType": "function",
+          "props": Object {
+            "onClick": [Function],
+            "url": "https://picsum.photos/300/400",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "2",
+          "nodeType": "function",
+          "props": Object {
+            "onClick": [Function],
+            "url": "https://picsum.photos/400/500",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

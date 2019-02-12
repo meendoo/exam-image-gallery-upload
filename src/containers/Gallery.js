@@ -23,10 +23,7 @@ export class Gallery extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (
-      prevProps.images !== this.props.images ||
-      prevProps.order !== this.props.order
-    ) {
+    if (prevProps.images !== this.props.images) {
       this.animateImages().play();
     }
   };

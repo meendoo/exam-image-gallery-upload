@@ -5,7 +5,7 @@ import { toggleSortOrderByTimestamp } from "../../utils";
 
 const imageFetchMock = [
   {
-    id: 0,
+    imageId: 0,
     name: "A.jpeg",
     timestamp: {
       seconds: 1548900000
@@ -13,7 +13,7 @@ const imageFetchMock = [
     url: "https://picsum.photos/200/300"
   },
   {
-    id: 1,
+    imageId: 1,
     name: "B.jpeg",
     timestamp: {
       seconds: 1548800000
@@ -21,7 +21,7 @@ const imageFetchMock = [
     url: "https://picsum.photos/300/400"
   },
   {
-    id: 2,
+    imageId: 2,
     name: "C.jpeg",
     timestamp: {
       seconds: 1548700000
@@ -43,10 +43,7 @@ describe("Gallery Reducer", () => {
     });
 
     expect(
-      gallery(
-        { isFetching: true },
-        { type: GALLERY.FETCH_SUCCESS, images: imageFetchMock }
-      )
+      gallery({ isFetching: true }, { type: GALLERY.FETCH_SUCCESS, images: imageFetchMock })
     ).toEqual({ isFetching: false, images: imageFetchMock });
 
     expect(

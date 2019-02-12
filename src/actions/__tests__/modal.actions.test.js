@@ -1,7 +1,8 @@
 import * as ModalActions from "../modal.actions";
-import MODAL from "../../constants/modal.constants";
+import * as ImageActions from "../image.actions";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import { MODAL, IMAGE } from "../../constants";
 
 const initialState = {
   gallery: {
@@ -52,12 +53,22 @@ describe("Modal actions tests", () => {
     expect(ModalActions.openUploadZoneModal()).toEqual(expectedAction);
   });
 
-  // it('Should trigger openImageViewerModal action', () => {
-  //   const store = mockStore({})
-  //   const imageRef = store.getState().gallery.images;
-  //   expect(dispatch({ type: MODAL.OPEN_IMAGE_VIEWER })).toBeCalled();
-  //   expect(ModalActions.openImageViewerModal(imageRef, 0)).toBeCalledWith(imageRef, 0);
-  // })
+  it("Should trigger openImageViewerModal action", () => {
+    const imageRef = store.getState().gallery.images;
+    const expectedAction = [
+      { type: MODAL.OPEN_IMAGE_VIEWER },
+      {
+        type: IMAGE.VIEW_IMAGE,
+        payload: {
+          imageRef,
+          currentViewIndex: 0
+        }
+      }
+    ];
+    store.dispatch({ type: MODAL.OPEN_IMAGE_VIEWER });
+    store.dispatch(ImageActions.viewImage(imageRef, 0));
+    expect(store.getActions()).toEqual(expectedAction);
+  });
 
   it("Should trigger closeModal action", () => {
     const expectedAction = { type: MODAL.CLOSE_MODAL };

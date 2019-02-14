@@ -7,10 +7,6 @@ import sinon from "sinon";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
-afterEach(() => {
-  sinon.restore();
-});
-
 const initialState = {
   gallery: {
     order: "Newest",
@@ -51,12 +47,17 @@ describe("Connected <Nav/> with mockStore", () => {
     store = mockStore(initialState);
   });
 
+  afterEach(() => {
+    sinon.restore();
+  });
+
   test("should toggle order title when clicked", () => {
     const order = store.getState().gallery.order;
-    // const orderClick = sinon.spy(GalleryActions.handleOrder(order));
-    // const wrapper = shallow(<OrderButton order={order} onClick={orderClick} />);
-    // wrapper.simulate("click");
+    const orderClick = sinon.spy(GalleryActions.handleOrder(order));
+    const wrapper = shallow(<OrderButton order={order} onClick={orderClick} />);
     expect(order).toBe("Newest");
+    // wrapper.simulate("click");
+    // expect(order).toBe("Oldest");
     // const rendered = renderer.create(<OrderButton order={order} onClick={GalleryActions.handleOrder(order)}/>);
 
     // expect(rendered.toJSON()).toMatchSnapshot();

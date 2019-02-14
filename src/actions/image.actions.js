@@ -1,5 +1,5 @@
 import { IMAGE } from "../constants";
-import api from "../services/api";
+import { removeImage } from "../services/requests";
 
 // Feed images to PhotoSwipe viewer and provides index from image clicked
 export const viewImage = (imageRef, currentViewIndex) => {
@@ -7,8 +7,7 @@ export const viewImage = (imageRef, currentViewIndex) => {
 };
 
 // Deletes a single image from the DB
-export const deleteImage = image => async dispatch => {
-  return api.delete(`/image/${image.imageId}`).then(() => {
-    dispatch({ type: IMAGE.DELETE });
-  });
+export const deleteImage = image => dispatch => {
+  dispatch({ type: IMAGE.DELETE });
+  return removeImage(image.imageId);
 };

@@ -3,7 +3,7 @@ import { GALLERY } from "../constants";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { toast } from "react-toastify";
 import { ImageActions } from "../actions";
-import api from "../services/api";
+import { getImages } from "../services/requests";
 
 // Connects to the 'images' collection on Firestore DB and populates images array
 export const fetchImages = () => {
@@ -11,9 +11,8 @@ export const fetchImages = () => {
     dispatch(showLoading());
     dispatch(fetchRequest());
     try {
-      await api.get("/image").then(images => {
-        dispatch(fetchSuccess(images.data));
-      });
+      const images = await getImages();
+      dispatch(fetchSuccess(images.data));
     } catch (error) {
       toast.error(error);
       dispatch(hideLoading());
@@ -34,9 +33,7 @@ export const fetchSuccess = images => {
 
 export const handleOrder = currentOrder => {
   return dispatch => {
-    currentOrder === "Newest"
-      ? dispatch(orderByOldest())
-      : dispatch(orderByNewest());
+    currentOrder === "Newest" ? dispatch(orderByOldest()) : dispatch(orderByNewest());
   };
 };
 
@@ -71,7 +68,6 @@ export const ToastCloseButton = ({ closeToast, confirmAction }) => {
 
 // Deletes all images from DB
 export const clearGallery = refs => async dispatch => {
-  // Deletions are done file by file (Firebase doesn't allow deleting the whole structure)
   const confirmDelete = () => {
     let deletePromises = [];
     refs.forEach(ref => {

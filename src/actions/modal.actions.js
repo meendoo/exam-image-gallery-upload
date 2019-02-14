@@ -1,7 +1,7 @@
 import { MODAL } from "../constants";
 import { toast } from "react-toastify";
 import { ImageActions, GalleryActions } from "../actions";
-import api from "../services/api";
+import { postImage } from "../services/requests";
 
 // Success message with template literal
 const successMessage = files =>
@@ -15,10 +15,7 @@ export const openUploadZoneModal = () => {
 };
 
 // Opens PhotoSwipe image viewer
-export const openImageViewerModal = (
-  imageRef,
-  currentViewIndex
-) => dispatch => {
+export const openImageViewerModal = (imageRef, currentViewIndex) => dispatch => {
   dispatch({ type: MODAL.OPEN_IMAGE_VIEWER });
   dispatch(ImageActions.viewImage(imageRef, currentViewIndex));
 };
@@ -43,25 +40,22 @@ export const sendFiles = files => async dispatch => {
     fileData.append("image", files[i], files[i].name);
 
     // Send files
-    let postFile = api
-      .post("image", fileData, {
-        onUploadProgress: e => {
-          let progress = e.loaded / e.total;
-          if (e.loaded / e.total === 1) {
-            toast.done(toastId);
-            return;
-          }
-          if (toastId === null) {
-            toastId = toast("Upload in Progress", {
-              progress: progress,
-              progressClassName: "toastProgressBar"
-            });
-          } else {
-            toast.update(toastId, { progress: progress });
-          }
+    let postFile = await postImage("image", fileData, {
+      onUploadProgress: e => {
+        let progress = e.loaded / e.total;
+        if (e.loaded / e.total === 1) {
+          toast.done(toastId);
+          return;
         }
-      })
-      .catch(err => toast.error(err, { toastId: toastId }));
+        if (toastId === null) {
+          toastId = toast("Upload in Progress", {
+            progress
+          });
+        } else {
+          toast.update(toastId, { progress });
+        }
+      }
+    }).catch(err => toast.error(err, { toastId }));
 
     // Grouping promises
     storagePromises.push(postFile);

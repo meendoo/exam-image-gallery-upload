@@ -9,6 +9,12 @@ const successMessage = files =>
     files.length > 1 ? "were" : "was"
   } uploaded successfully.`;
 
+// Fail message with template literal
+const failMessage = files =>
+  `${files.length} image${files.length > 1 ? "s" : ""} ${
+    files.length > 1 ? "were" : "was"
+  } not uploaded.`;
+
 // Opens upload modal
 export const openUploadZoneModal = () => {
   return { type: MODAL.OPEN_UPLOAD_ZONE };
@@ -40,36 +46,45 @@ export const sendFiles = files => async dispatch => {
     fileData.append("image", files[i], files[i].name);
 
     // Send files
-    let postFile = await postImage("image", fileData, {
-      onUploadProgress: e => {
-        let progress = e.loaded / e.total;
-        if (e.loaded / e.total === 1) {
-          toast.done(toastId);
-          return;
+    let postFile;
+    try {
+      postFile = await postImage(fileData, {
+        onUploadProgress: e => {
+          let progress = e.loaded / e.total;
+          if (e.loaded / e.total === 1) {
+            toast.done(toastId);
+            return;
+          }
+          if (toastId === null) {
+            toastId = toast("Upload in Progress", {
+              progress
+            });
+          } else {
+            toast.update(toastId, { progress });
+          }
         }
-        if (toastId === null) {
-          toastId = toast("Upload in Progress", {
-            progress
-          });
-        } else {
-          toast.update(toastId, { progress });
-        }
-      }
-    }).catch(err => toast.error(err, { toastId }));
-
-    // Grouping promises
-    storagePromises.push(postFile);
+      })
+        .then(() => {
+          dispatch({ type: MODAL.UPLOAD_SUCCESS });
+        })
+        .catch(err => {
+          dispatch({ type: MODAL.UPLOAD_REJECT });
+          throw new Error(err);
+        });
+      // Grouping promises
+      storagePromises.push(postFile);
+    } catch (error) {
+      storagePromises.push(Promise.reject());
+    }
   }
 
   // After all uploads are done, dispatch success actions
   Promise.all(storagePromises)
     .then(() => {
-      dispatch({ type: MODAL.UPLOAD_SUCCESS });
       toast.success(successMessage(files), { autoClose: true });
       dispatch(GalleryActions.fetchImages());
     })
     .catch(err => {
-      dispatch({ type: MODAL.UPLOAD_REJECT });
-      toast.error(err);
+      toast.error(failMessage(files), { autoClose: true });
     });
 };

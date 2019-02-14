@@ -36,6 +36,18 @@ export function gallery(state = initialState, action) {
         isFetching: false,
         images: []
       };
+    case GALLERY.UPDATE_CAPTION:
+      let newArrayOfImages = Array.from(state.images);
+      const index = newArrayOfImages.findIndex(e => e.imageId === action.image.imageId);
+      if (index === -1) {
+        return state;
+      } else {
+        newArrayOfImages[index] = action.image;
+      }
+      return {
+        ...state,
+        images: newArrayOfImages
+      };
     default:
       return state;
   }

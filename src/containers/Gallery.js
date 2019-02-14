@@ -32,9 +32,14 @@ export class Gallery extends Component {
     this.props.fetchImages();
   };
 
+  showImage = (e, images, imgIndex) => {
+    e.stopPropagation();
+    this.props.openImageViewerModal(images, imgIndex);
+  };
+
   render() {
     this.imageAnimation.kill().clear();
-    const { images } = this.props;
+    const { images, updateImageCaption } = this.props;
     const imgs =
       images &&
       images.length > 0 &&
@@ -42,9 +47,12 @@ export class Gallery extends Component {
         return (
           <Image
             key={img.imageId}
+            caption={img.caption}
+            imageId={img.imageId}
             url={img.url}
             className={styles.image}
-            onClick={() => this.props.openImageViewerModal(images, imgIndex)}
+            onClick={e => this.showImage(e, images, imgIndex)}
+            updateImageCaption={updateImageCaption}
           />
         );
       });
@@ -55,9 +63,7 @@ export class Gallery extends Component {
         {images && images.length > 0 ? (
           <div className={styles.gallery}>{imgs}</div>
         ) : (
-          <div className={styles.placeholderText}>
-            You haven't uploaded images yet :(
-          </div>
+          <div className={styles.placeholderText}>You haven't uploaded images yet :(</div>
         )}
       </>
     );
@@ -71,6 +77,8 @@ const mapStateToProps = ({ gallery, modal }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchImages: () => dispatch(GalleryActions.fetchImages()),
+  updateImageCaption: (imageId, caption) =>
+    dispatch(GalleryActions.updateImageCaption(imageId, caption)),
   openImageViewerModal: (imageRef, currentViewIndex) =>
     dispatch(ModalActions.openImageViewerModal(imageRef, currentViewIndex))
 });

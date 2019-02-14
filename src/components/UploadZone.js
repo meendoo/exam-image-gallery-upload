@@ -18,6 +18,7 @@ export class UploadZone extends Component {
     e.stopPropagation();
     e.preventDefault();
     this.setState({ isFileHovering: true });
+    console.log(e.target);
   };
 
   onDragLeave = e => {
@@ -37,12 +38,7 @@ export class UploadZone extends Component {
   };
 
   componentDidMount = () => {
-    TweenMax.fromTo(
-      `.${styles.uploadBox}`,
-      0.3,
-      { y: 30, ease: Power2.easeOut },
-      { y: 0 }
-    );
+    TweenMax.fromTo(`.${styles.uploadBox}`, 0.3, { y: 30, ease: Power2.easeOut }, { y: 0 });
   };
 
   render() {
@@ -51,8 +47,7 @@ export class UploadZone extends Component {
       return (
         <Modal isVisible={isUploadZoneOpen}>
           <div
-            className={`${styles.uploadBox} ${this.state.isFileHovering &&
-              styles.highLight}`}
+            className={`${styles.uploadBox} ${this.state.isFileHovering && styles.highLight}`}
             onDragOver={this.onDragOver}
             onDragLeave={this.onDragLeave}
             onDrop={this.onFileDrop}

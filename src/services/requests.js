@@ -18,6 +18,15 @@ export const postImage = (data, config) => {
     });
 };
 
+export const updateCaption = (imageId, data) => {
+  return api
+    .put(`/image/${imageId}`, data)
+    .then(image => image.data)
+    .catch(err => {
+      throw new Error(err);
+    });
+};
+
 export const removeImage = imageId => {
   return api
     .delete(`image/${imageId}`)

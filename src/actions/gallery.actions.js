@@ -1,9 +1,9 @@
 import React from "react";
-import { GALLERY } from "../constants";
+import { GALLERY, IMAGE } from "../constants";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { toast } from "react-toastify";
 import { ImageActions } from "../actions";
-import { getImages } from "../services/requests";
+import { getImages, updateCaption } from "../services/requests";
 
 // Connects to the 'images' collection on Firestore DB and populates images array
 export const fetchImages = () => {
@@ -34,6 +34,13 @@ export const fetchSuccess = images => {
 export const handleOrder = currentOrder => {
   return dispatch => {
     currentOrder === "Newest" ? dispatch(orderByOldest()) : dispatch(orderByNewest());
+  };
+};
+
+export const updateImageCaption = (imageId, data) => {
+  return async dispatch => {
+    const newCaption = await updateCaption(imageId, data);
+    dispatch({ type: GALLERY.UPDATE_CAPTION, image: newCaption });
   };
 };
 

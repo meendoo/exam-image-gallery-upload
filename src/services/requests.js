@@ -20,7 +20,7 @@ export const postImage = (data, config) => {
 
 export const removeImage = imageId => {
   return api
-    .delete(`image/:${imageId}`)
+    .delete(`image/${imageId}`)
     .then(image => image)
     .catch(err => {
       throw new Error(err);
